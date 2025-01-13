@@ -2,54 +2,40 @@
 {
     public class MyLinkedList<T>
     {
-        private class Node
-        {
-            public T Value;
-            public Node Next;
-
-            public Node(T value)
-            {
-                Value = value;
-                Next = null;
-            }
-        }
-        private Node head;
+        private Node head; 
+        private Node tail; 
 
         public MyLinkedList()
         {
             head = null;
-        }й
+            tail = null; 
+        }
         public void Add(T value)
         {
-            Node newNode = new Node(value);
+            Node newNode = new Node(value); 
 
-            if (head == null)
+            if (head == null) 
             {
                 head = newNode;
+                tail = newNode;
             }
             else
             {
-                Node current = head;
-                while (current.Next != null)
-                {
-                    current = current.Next;
-                }
-                current.Next = newNode;
+                tail.Next = newNode;
+                tail = newNode;
             }
         }
-
-        public void Remove(T value)
+        public bool Remove(T value)
         {
-            if (head == null)
-            {
-                Console.WriteLine("Список пуст, удаление невозможно.");
-                return;
-            }
+            if (head == null) 
+                return false;
 
             if (head.Value.Equals(value))
             {
-                head = head.Next;
-                return;
+                head = head.Next; 
+                if (head == null) 
+                    tail = null; 
+                return true;
             }
 
             Node current = head;
@@ -58,46 +44,46 @@
                 current = current.Next;
             }
 
-            if (current.Next == null)
-            {
-                Console.WriteLine("Элемент не найден.");
-            }
-            else
-            {
-                current.Next = current.Next.Next;
-            }
+            if (current.Next == null) 
+                return false;
+
+            current.Next = current.Next.Next; 
+
+            if (current.Next == null) 
+                tail = current; 
+
+            return true;
         }
-
-
         public bool Contains(T value)
         {
             Node current = head;
             while (current != null)
             {
                 if (current.Value.Equals(value))
-                {
                     return true;
-                }
                 current = current.Next;
             }
             return false;
         }
-
         public void Print()
         {
-            if (head == null)
-            {
-                Console.WriteLine("Список пуст.");
-                return;
-            }
-
             Node current = head;
             while (current != null)
             {
-                Console.Write(current.Value + " -> ");
+                Console.Write(current.Value + " ");
                 current = current.Next;
             }
-            Console.WriteLine("null");
+            Console.WriteLine();
+        }
+        private class Node
+        {
+            public T Value;
+            public Node Next;
+            public Node(T value)
+            {
+                Value = value;
+                Next = null;
+            }
         }
     }
 }
