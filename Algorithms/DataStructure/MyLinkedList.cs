@@ -1,20 +1,20 @@
-﻿namespace Algorithms
+﻿namespace Algorithms.DataStructure
 {
     public class MyLinkedList<T>
     {
-        private Node head; 
-        private Node tail; 
+        private Node head;
+        private Node tail;
 
         public MyLinkedList()
         {
             head = null;
-            tail = null; 
+            tail = null;
         }
         public void Add(T value)
         {
-            Node newNode = new Node(value); 
+            Node newNode = new Node(value);
 
-            if (head == null) 
+            if (head == null)
             {
                 head = newNode;
                 tail = newNode;
@@ -27,14 +27,14 @@
         }
         public bool Remove(T value)
         {
-            if (head == null) 
+            if (head == null)
                 return false;
 
             if (head.Value.Equals(value))
             {
-                head = head.Next; 
-                if (head == null) 
-                    tail = null; 
+                head = head.Next;
+                if (head == null)
+                    tail = null;
                 return true;
             }
 
@@ -44,13 +44,13 @@
                 current = current.Next;
             }
 
-            if (current.Next == null) 
+            if (current.Next == null)
                 return false;
 
-            current.Next = current.Next.Next; 
+            current.Next = current.Next.Next;
 
-            if (current.Next == null) 
-                tail = current; 
+            if (current.Next == null)
+                tail = current;
 
             return true;
         }

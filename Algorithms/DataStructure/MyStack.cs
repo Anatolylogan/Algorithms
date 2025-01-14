@@ -1,9 +1,9 @@
-﻿namespace Algorithms
+﻿namespace Algorithms.DataStructure
 {
     public class MyStack<T>
     {
-        private T[] items; 
-        private int count; 
+        private T[] items;
+        private int count;
         private const int InitialCapacity = 4;
         public MyStack()
         {
@@ -23,18 +23,18 @@
         {
             if (count == 0)
             {
-                throw new InvalidOperationException("Stack is empty"); 
+                throw new InvalidOperationException("Stack is empty");
             }
             count--;
-            T value = items[count]; 
-            items[count] = default; 
-            return value; 
+            T value = items[count];
+            items[count] = default;
+            return value;
         }
         public T Peek()
         {
             if (count == 0)
             {
-                throw new InvalidOperationException("Stack is empty"); 
+                throw new InvalidOperationException("Stack is empty");
             }
             return items[count - 1];
         }
@@ -42,11 +42,11 @@
         private void Resize(int newCapacity)
         {
             T[] newArray = new T[newCapacity];
-            for (int i = 0; i < count; i++) 
+            for (int i = 0; i < count; i++)
             {
                 newArray[i] = items[i];
             }
-            items = newArray; 
+            items = newArray;
         }
         public void Print()
         {
