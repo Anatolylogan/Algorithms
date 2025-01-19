@@ -1,35 +1,31 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Algorithms
+{
+    public class Countingfrequency
     {
-        public class Countingfrequency
+        public Dictionary<string, int> CountWords(string input)
         {
-            public static Dictionary<string, int> CountWordFrequency(string text)
+            if (string.IsNullOrWhiteSpace(input))
             {
-                var wordCount = new Dictionary<string, int>();
-
-                string[] words = Regex.Split(text.ToLower(), @"\W+");
-
-                foreach (var word in words)
-                {
-                    if (!string.IsNullOrEmpty(word))
-                    {
-                        if (wordCount.ContainsKey(word))
-                        {
-                            wordCount[word]++;
-                        }
-                        else
-                        {
-                            wordCount[word] = 1;
-                        }
-                    }
-                }
-
-                return wordCount;
+                throw new ArgumentException("Текст не может быть пустым или состоять только из пробелов.");
             }
+
+            var words = input.ToLower()
+            .Split(new[] { ' ', '\n', '\t', ',', '.', '!', '?', ';', ':' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var wordCount = new Dictionary<string, int>();
+
+            foreach (var word in words)
+            {
+                if (!string.IsNullOrEmpty(word))
+                {
+                    wordCount[word] = wordCount.TryGetValue(word, out int count) ? count + 1 : 1;
+                }
+            }
+
+            return wordCount;
         }
     }
-
-
-
-
+}
